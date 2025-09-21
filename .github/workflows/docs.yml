@@ -1,7 +1,8 @@
 name: "Build Javadocs"
 'on':
   schedule:
-    - cron: "0 0 24 */6 *"
+    - cron: "0 0 25 SEP *"
+    - cron: "0 0 25 MAR *"
   workflow_dispatch:
 jobs:
   build_docs:
