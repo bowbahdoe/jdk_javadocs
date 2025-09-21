@@ -11,10 +11,12 @@ jobs:
       - name: Set current date as env variable
         run: echo "NOW=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - uses: actions/checkout@v3
+      - name: Determine Java Version
+        run: java src/GetVersion.java > java-version
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: 'latest'
+          java-version-file: 'java-version'
           distribution: 'corretto'
       - uses: extractions/setup-just@v2
       - run: sudo apt-get update && sudo apt-get install libasound2-dev libcups2-dev libfontconfig1-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
