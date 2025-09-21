@@ -1,0 +1,18 @@
+name: "Build Javadocs"
+'on':
+  workflow_dispatch:
+jobs:
+  build_macos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set current date as env variable
+        run: echo "NOW=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '25'
+          distribution: 'corretto'
+      - uses: extractions/setup-just@v2
+      - name: Clone JDK and Make Docs
+        run: just docs
