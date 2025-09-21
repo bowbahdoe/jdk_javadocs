@@ -18,7 +18,7 @@ jobs:
       - name: Clone JDK and Make Docs
         run: just docs
       - run: tree jdk/build/linux-x86_64-server-release/images/docs
-      #- name: Deploy 🚀
-      #  uses: JamesIves/github-pages-deploy-action@v4
-      #  with:
-      #    folder: build
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: jdk/build/linux-x86_64-server-release/images/docs
