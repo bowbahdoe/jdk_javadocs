@@ -17,3 +17,4 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install libasound2-dev libcups2-dev libfontconfig1-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
       - name: Clone JDK and Make Docs
         run: just docs
+      - run: ls jdk/build/linux-x86_64-server-release
