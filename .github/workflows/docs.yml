@@ -2,7 +2,7 @@ name: "Build Javadocs"
 'on':
   workflow_dispatch:
 jobs:
-  build_macos:
+  build_docs:
     runs-on: ubuntu-latest
     steps:
       - name: Set current date as env variable
@@ -14,6 +14,6 @@ jobs:
           java-version: '25'
           distribution: 'corretto'
       - uses: extractions/setup-just@v2
-      - run: sudo apt-get update && sudo apt-get install libasound2-dev libcups2-dev libfontconfig1-dev
+      - run: sudo apt-get update && sudo apt-get install libasound2-dev libcups2-dev libfontconfig1-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
       - name: Clone JDK and Make Docs
         run: just docs
