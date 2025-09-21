@@ -1,15 +1,19 @@
-void run(List<String> cmd) throws Exception {
-    int exit = new ProcessBuilder(cmd).inheritIO().start().waitFor();
-    if (exit != 0) {
-        throw new Exception("" + exit);
-    }
-}
-
-void main(String[] args) throws Exception {
+void main() throws Exception {
     var tags = Files.readAllLines(Path.of("tags"));
-    var tagPattern = Pattern.compile("jdk-(<?major>\\d+)\\+(<?revision>\\d+)");
+    var tagPattern = Pattern.compile("jdk-(?<major>\\d+)-ga");
+
+    record TagAndMajor(String tag, int major) {}
     tags.stream()
             .filter(tag -> tag.startsWith("jdk-"))
-            .sorted(Comparator.<String, String>comparing(tag -> tag.replaceFirst("jdk-", "").split("\\+", 2)[0]).reversed())
-            .forEach(IO::println);
+            .filter(tag -> tag.endsWith("-ga"))
+            .map(tag -> {
+                var matcher = tagPattern.matcher(tag);
+                matcher.find();
+                return new TagAndMajor(
+                        tag, Integer.parseInt(matcher.group("major"))
+                );
+            })
+            .max(Comparator.comparing(TagAndMajor::major))
+            .map(TagAndMajor::tag)
+            .ifPresent(IO::println);
 }
