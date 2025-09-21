@@ -16,7 +16,7 @@ td, th { padding: 3px; border: 1px solid black; font-weight: normal; text-align:
 .indent4 { padding-left: 160px; }
 </style>
 </head>
-<body> <header class="draft-header" role="banner">This specification is not final and is subject to change. Use is subject to <a href="https://www.oracle.com/java/javase/terms/license/java26speclicense.html">license terms</a>.</header><header id="title-block-header"> <div class="navbar"> <div></div> <nav><ul><li><a href="../../api/index.html">API</a> <li><a href="../index.html">OTHER SPECIFICATIONS</a> <li><a href="../man/index.html">TOOL GUIDES</a></ul></nav> </div> </header>
+<body> <header class="draft-header" role="banner">This specification is not final and is subject to change. Use is subject to <a href="https://www.oracle.com/java/javase/terms/license/java25speclicense.html">license terms</a>.</header><header id="title-block-header"> <div class="navbar"> <div></div> <nav><ul><li><a href="../../api/index.html">API</a> <li><a href="../index.html">OTHER SPECIFICATIONS</a> <li><a href="../man/index.html">TOOL GUIDES</a></ul></nav> </div> </header>
 <header>
 <h1 id="Protocol_Details">Java Debug Wire Protocol Details</h1>
 </header>
@@ -3966,7 +3966,7 @@ Force a method to return before it reaches a return statement.  <p>The method wh
 <tr><th scope="row"><a href="#Error_INVALID_THREAD">INVALID_THREAD</a><td>The thread is null, not a valid thread, or the thread is not alive.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_INVALID_OBJECT">INVALID_OBJECT</a><td>Thread or value is not a known ID.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_THREAD_NOT_SUSPENDED">THREAD_NOT_SUSPENDED</a><td>If the specified thread has not been suspended by an event.&nbsp;</tr>
-<tr><th scope="row"><a href="#Error_OPAQUE_FRAME">OPAQUE_FRAME</a><td>Unable to force the current frame to return (e.g. the current frame is executing a native method).&nbsp;</tr>
+<tr><th scope="row"><a href="#Error_OPAQUE_FRAME">OPAQUE_FRAME</a><td>Attempted to return early from a frame corresponding to a native method, the thread is a suspended virtual thread and the target VM is unable to force its current frame to return, or the implementation is unable to provide this functionality on this frame.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_NO_MORE_FRAMES">NO_MORE_FRAMES</a><td>There are no more Java or JNI frames on the call stack.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_NOT_IMPLEMENTED">NOT_IMPLEMENTED</a><td>The functionality is not implemented in this virtual machine.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_TYPE_MISMATCH">TYPE_MISMATCH</a><td>Value is not an appropriate type for the return value of the method.&nbsp;</tr>
@@ -4694,7 +4694,6 @@ Returns the value of one or more local variables in a given frame. Each variable
 <tr><th scope="row"><a href="#Error_INVALID_OBJECT">INVALID_OBJECT</a><td>If this reference type has been unloaded and garbage collected.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_INVALID_FRAMEID">INVALID_FRAMEID</a><td>Invalid jframeID.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_INVALID_SLOT">INVALID_SLOT</a><td>Invalid slot.&nbsp;</tr>
-<tr><th scope="row"><a href="#Error_OPAQUE_FRAME">OPAQUE_FRAME</a><td>Unable to get the value of local variables in the frame (e.g. the frame is executing a native method).&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_VM_DEAD">VM_DEAD</a><td>The virtual machine is not running.&nbsp;</tr>
 </table>
 </dd></dl>
@@ -4750,8 +4749,7 @@ Sets the value of one or more local variables. Each variable must be visible at 
 <tr><th scope="row"><a href="#Error_INVALID_THREAD">INVALID_THREAD</a><td>The thread is null or not a valid thread.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_INVALID_OBJECT">INVALID_OBJECT</a><td>If this reference type has been unloaded and garbage collected.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_INVALID_FRAMEID">INVALID_FRAMEID</a><td>Invalid jframeID.&nbsp;</tr>
-<tr><th scope="row"><a href="#Error_INVALID_SLOT">INVALID_SLOT</a><td>Invalid slot.&nbsp;</tr>
-<tr><th scope="row"><a href="#Error_OPAQUE_FRAME">OPAQUE_FRAME</a><td>Unable to set the value of local variables in the frame (e.g. the frame is executing a native method).&nbsp;</tr>
+<tr><th scope="row"><a href="#Error_OPAQUE_FRAME">OPAQUE_FRAME</a><td>The thread is a suspended virtual thread and the target VM does not support setting the value of local variables in the frame.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_VM_DEAD">VM_DEAD</a><td>The virtual machine is not running.&nbsp;</tr>
 </table>
 </dd></dl>
@@ -4838,7 +4836,7 @@ Pop the top-most stack frames of the thread stack, up to, and including 'frame'.
 <tr><th scope="row"><a href="#Error_INVALID_FRAMEID">INVALID_FRAMEID</a><td>Invalid jframeID.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_THREAD_NOT_SUSPENDED">THREAD_NOT_SUSPENDED</a><td>If the specified thread has not been suspended by an event.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_NO_MORE_FRAMES">NO_MORE_FRAMES</a><td>There are no more Java or JNI frames on the call stack.&nbsp;</tr>
-<tr><th scope="row"><a href="#Error_OPAQUE_FRAME">OPAQUE_FRAME</a><td>Unable to pop one or more of the frames (e.g. one or more of the frames to pop is a native method or its caller is a native method).&nbsp;</tr>
+<tr><th scope="row"><a href="#Error_OPAQUE_FRAME">OPAQUE_FRAME</a><td>If one or more of the frames to pop is a native method or its caller is a native method, or the thread is a suspended virtual thread and the implementation was unable to pop the frames.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_NOT_IMPLEMENTED">NOT_IMPLEMENTED</a><td>The functionality is not implemented in this virtual machine.&nbsp;</tr>
 <tr><th scope="row"><a href="#Error_VM_DEAD">VM_DEAD</a><td>The virtual machine is not running.&nbsp;</tr>
 </table>
@@ -5636,4 +5634,4 @@ The invoke options are a combination of zero or more of the following bit flags:
 <tr><th scope="row"><span id="InvokeOptions_INVOKE_NONVIRTUAL"></span>INVOKE_NONVIRTUAL<td class="centered">0x02<td>otherwise, normal virtual invoke (instance methods only)&nbsp;</tr>
 </table>
 </main>
-<footer class="legal-footer"><hr/><a href="../../legal/copyright.html">Copyright</a> &copy; 1993, 2025, Oracle and/or its affiliates, 500 Oracle Parkway, Redwood Shores, CA 94065 USA.<br>All rights reserved. Use is subject to <a href="https://www.oracle.com/java/javase/terms/license/java26speclicense.html">license terms</a> and the <a href="https://www.oracle.com/technetwork/java/redist-137594.html">documentation redistribution policy</a>. <br><strong>DRAFT 26-internal-adhoc.runner.jdk</strong> <!-- Version 26-internal-adhoc.runner.jdk --></footer></body></html>
+<footer class="legal-footer"><hr/><a href="../../legal/copyright.html">Copyright</a> &copy; 1993, 2025, Oracle and/or its affiliates, 500 Oracle Parkway, Redwood Shores, CA 94065 USA.<br>All rights reserved. Use is subject to <a href="https://www.oracle.com/java/javase/terms/license/java25speclicense.html">license terms</a> and the <a href="https://www.oracle.com/technetwork/java/redist-137594.html">documentation redistribution policy</a>. <br><strong>DRAFT 25-internal-adhoc.runner.jdk</strong> <!-- Version 25-internal-adhoc.runner.jdk --></footer></body></html>

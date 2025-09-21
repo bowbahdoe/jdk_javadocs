@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JVM(TM) Tool Interface 26.0.0</title>
+        <title>JVM(TM) Tool Interface 25.0.0</title>
         <link rel="stylesheet" href="../resources/jdk-default.css"/><style>
           .centered { text-align: center; }
           .leftAligned { text-align: left; }
@@ -49,13 +49,13 @@
           div.topBorder { border-top: 2px solid black; }
         </style>
     </head>
-    <body> <header class="draft-header" role="banner">This specification is not final and is subject to change. Use is subject to <a href="https://www.oracle.com/java/javase/terms/license/java26speclicense.html">license terms</a>.</header><header id="title-block-header"> <div class="navbar"> <div></div> <nav><ul><li><a href="./../api/index.html">API</a> <li><a href="./index.html">OTHER SPECIFICATIONS</a> <li><a href="./man/index.html">TOOL GUIDES</a></ul></nav> </div> </header>
+    <body> <header class="draft-header" role="banner">This specification is not final and is subject to change. Use is subject to <a href="https://www.oracle.com/java/javase/terms/license/java25speclicense.html">license terms</a>.</header><header id="title-block-header"> <div class="navbar"> <div></div> <nav><ul><li><a href="./../api/index.html">API</a> <li><a href="./index.html">OTHER SPECIFICATIONS</a> <li><a href="./man/index.html">TOOL GUIDES</a></ul></nav> </div> </header>
         <header class="centered">
             <h1>
                     JVM<sup style="font-size: xx-small">TM</sup>  Tool Interface
   
             </h1>
-            <h2>Version 26.0</h2>
+            <h2>Version 25.0</h2>
         </header>
         <nav>
             <ul class="toc">
@@ -6471,8 +6471,14 @@ PopFrame(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to pop this frame
-          (e.g. called or calling method is a native method).
+          Called or calling method is a native method.
+          The implementation is unable to pop this frame.
+        </td>
+                </tr>
+                <tr>
+                    <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
+          The thread is a suspended virtual thread and the implementation
+          was unable to pop the current frame.
         </td>
                 </tr>
                 <tr>
@@ -6771,8 +6777,8 @@ NotifyFramePop(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-           A <a href="#FramePop"><code>FramePop</code></a> event cannot be generated for this frame
-          (e.g. the frame at <code>depth</code> is executing a native method).
+          The frame at <code>depth</code> is executing a
+          native method.
         </td>
                 </tr>
                 <tr>
@@ -7128,8 +7134,12 @@ ForceEarlyReturnObject(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to force the current frame to return
-          (e.g. current frame is executing a native method).
+          Attempted to return early from a frame
+          corresponding to a native method.
+          The thread is a suspended virtual thread and the implementation was
+          unable to force its current frame to return.
+          Or the implementation is unable to provide
+          this functionality on this frame.
         </td>
                 </tr>
                 <tr>
@@ -7292,8 +7302,12 @@ ForceEarlyReturnInt(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to force the current frame to return
-          (e.g. current frame is executing a native method).
+          Attempted to return early from a frame
+          corresponding to a native method.
+          The thread is a suspended virtual thread and the implementation was
+          unable to force its current frame to return.
+          Or the implementation is unable to provide
+          this functionality on this frame.
         </td>
                 </tr>
                 <tr>
@@ -7444,8 +7458,12 @@ ForceEarlyReturnLong(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to force the current frame to return
-          (e.g. current frame is executing a native method).
+          Attempted to return early from a frame
+          corresponding to a native method.
+          The thread is a suspended virtual thread and the implementation was
+          unable to force its current frame to return.
+          Or the implementation is unable to provide
+          this functionality on this frame.
         </td>
                 </tr>
                 <tr>
@@ -7593,8 +7611,12 @@ ForceEarlyReturnFloat(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to force the current frame to return
-          (e.g. current frame is executing a native method).
+          Attempted to return early from a frame
+          corresponding to a native method.
+          The thread is a suspended virtual thread and the implementation was
+          unable to force its current frame to return.
+          Or the implementation is unable to provide
+          this functionality on this frame.
         </td>
                 </tr>
                 <tr>
@@ -7742,8 +7764,12 @@ ForceEarlyReturnDouble(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to force the current frame to return
-          (e.g. current frame is executing a native method).
+          Attempted to return early from a frame
+          corresponding to a native method.
+          The thread is a suspended virtual thread and the implementation was
+          unable to force its current frame to return.
+          Or the implementation is unable to provide
+          this functionality on this frame.
         </td>
                 </tr>
                 <tr>
@@ -7885,8 +7911,12 @@ ForceEarlyReturnVoid(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to force the current frame to return
-          (e.g. current frame is executing a native method).
+          Attempted to return early from a frame
+          corresponding to a native method.
+          The thread is a suspended virtual thread and the implementation was
+          unable to force its current frame to return.
+          Or the implementation is unable to provide
+          this functionality on this frame.
         </td>
                 </tr>
                 <tr>
@@ -12138,8 +12168,7 @@ GetLocalObject(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to get the frame locals
-          (e.g. the frame at <code>depth</code> is executing a native method).
+          Not a visible frame
         </td>
                 </tr>
                 <tr>
@@ -12500,8 +12529,7 @@ GetLocalInt(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to get the frame locals
-          (e.g. the frame at <code>depth</code> is executing a native method).
+          Not a visible frame
         </td>
                 </tr>
                 <tr>
@@ -12685,8 +12713,7 @@ GetLocalLong(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to get the frame locals
-          (e.g. the frame at <code>depth</code> is executing a native method).
+          Not a visible frame
         </td>
                 </tr>
                 <tr>
@@ -12870,8 +12897,7 @@ GetLocalFloat(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to get the frame locals
-          (e.g. the frame at <code>depth</code> is executing a native method).
+          Not a visible frame
         </td>
                 </tr>
                 <tr>
@@ -12923,7 +12949,7 @@ GetLocalDouble(jvmtiEnv* env,
             jdouble* value_ptr)</pre>
             </blockquote>
                     This function can be used to retrieve the value of a local
-        variable whose type is <code>double</code>.
+        variable whose type is <code>long</code>.
         
             <div class="sep"></div>
                     The specified thread must be suspended or must be the current thread.
@@ -13055,8 +13081,7 @@ GetLocalDouble(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to get the frame locals
-          (e.g. the frame at <code>depth</code> is executing a native method).
+          Not a visible frame
         </td>
                 </tr>
                 <tr>
@@ -13245,8 +13270,14 @@ SetLocalObject(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to set the frame locals
-          (e.g. the frame at <code>depth</code> is executing a native method).
+          Not a visible frame
+        </td>
+                </tr>
+                <tr>
+                    <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
+          The thread is a suspended virtual thread and the implementation does not support
+          setting the value of locals in the frame of the given depth.
+          See <a href="#local">Local Variables</a>.
         </td>
                 </tr>
                 <tr>
@@ -13431,8 +13462,14 @@ SetLocalInt(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to set the frame locals
-          (e.g. the frame at <code>depth</code> is executing a native method).
+          Not a visible frame
+        </td>
+                </tr>
+                <tr>
+                    <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
+          The thread is a suspended virtual thread and the implementation does not support
+          setting the value of locals in the frame of the given depth.
+          See <a href="#local">Local Variables</a>.
         </td>
                 </tr>
                 <tr>
@@ -13606,8 +13643,14 @@ SetLocalLong(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to set the frame locals
-          (e.g. the frame at <code>depth</code> is executing a native method).
+          Not a visible frame
+        </td>
+                </tr>
+                <tr>
+                    <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
+          The thread is a suspended virtual thread and the implementation does not support
+          setting the value of locals in the frame of the given depth.
+          See <a href="#local">Local Variables</a>.
         </td>
                 </tr>
                 <tr>
@@ -13781,8 +13824,14 @@ SetLocalFloat(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to set the frame locals
-          (e.g. the frame at <code>depth</code> is executing a native method).
+          Not a visible frame
+        </td>
+                </tr>
+                <tr>
+                    <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
+          The thread is a suspended virtual thread and the implementation does not support
+          setting the value of locals in the frame of the given depth.
+          See <a href="#local">Local Variables</a>.
         </td>
                 </tr>
                 <tr>
@@ -13956,8 +14005,14 @@ SetLocalDouble(jvmtiEnv* env,
                 </tr>
                 <tr>
                     <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
-          The implementation is unable to set the frame locals
-          (e.g. the frame at <code>depth</code> is executing a native method).
+          Not a visible frame
+        </td>
+                </tr>
+                <tr>
+                    <th scope="row"><a href="#JVMTI_ERROR_OPAQUE_FRAME"><code>JVMTI_ERROR_OPAQUE_FRAME</code></a></th><td>
+          The thread is a suspended virtual thread and the implementation does not support
+          setting the value of locals in the frame of the given depth.
+          See <a href="#local">Local Variables</a>.
         </td>
                 </tr>
                 <tr>
@@ -28502,7 +28557,7 @@ SetHeapSamplingInterval(jvmtiEnv* env,
                 </dt>
                 <dd>
                           Information about the frame is not available (e.g. for native frames),
-      or the implementation is unable to provide this functionality on this frame.
+      or the function cannot be performed on the thread's current frame.
     
                     <div class="sep"></div>
                 </dd>
@@ -31879,17 +31934,16 @@ Exception(jvmtiEnv *jvmti_env,
       parameters  uniquely identify the current location
       (where the exception was detected) and allow
       the mapping to source file and line number when that information is
-      available. The <code>exception</code> parameter identifies the thrown
+      available. The <code>exception</code> field identifies the thrown
       exception object. The <code>catch_method</code>
       and <code>catch_location</code> identify the location of the catch clause,
       if any, that handles the thrown exception. If there is no such catch clause,
-      the <code>catch_method</code> is set to null and the <code>catch_location</code>is set to 0.
-      There is no guarantee that the thread will ever
+      each field is set to 0. There is no guarantee that the thread will ever
       reach this catch clause. If there are native methods on the call stack
       between the throw location and the catch clause, the exception may
       be reset by one of those native methods.
-      Similarly, exceptions that are reported as uncaught (<code>catch_method</code>
-      set to null) may in fact be caught by native code.
+      Similarly, exceptions that are reported as uncaught (<code>catch_klass</code>
+      et al. set to 0) may in fact be caught by native code.
       Agents can check for these occurrences by monitoring
       <a href="#ExceptionCatch"><code>ExceptionCatch</code></a> events.
       Note that finally clauses are implemented as catch and re-throw. Therefore they
@@ -32035,7 +32089,7 @@ ExceptionCatch(jvmtiEnv *jvmti_env,
       available. For exceptions caught in a Java programming language method, the
       <code>exception</code> object identifies the exception object. Exceptions
       caught in native methods are not necessarily available by the time the
-      exception catch is reported, so the <code>exception</code> parameter is set
+      exception catch is reported, so the <code>exception</code> field is set
       to null.
     
             <div class="sep"></div>
@@ -36751,5 +36805,5 @@ GarbageCollectionFinish(jvmtiEnv *jvmti_env)</pre>
                 </tr>
             </table>
         </main>
-    <footer class="legal-footer"><hr/><a href="../legal/copyright.html">Copyright</a> &copy; 1993, 2025, Oracle and/or its affiliates, 500 Oracle Parkway, Redwood Shores, CA 94065 USA.<br>All rights reserved. Use is subject to <a href="https://www.oracle.com/java/javase/terms/license/java26speclicense.html">license terms</a> and the <a href="https://www.oracle.com/technetwork/java/redist-137594.html">documentation redistribution policy</a>. <br><strong>DRAFT 26-internal-adhoc.runner.jdk</strong> <!-- Version 26-internal-adhoc.runner.jdk --></footer></body>
+    <footer class="legal-footer"><hr/><a href="../legal/copyright.html">Copyright</a> &copy; 1993, 2025, Oracle and/or its affiliates, 500 Oracle Parkway, Redwood Shores, CA 94065 USA.<br>All rights reserved. Use is subject to <a href="https://www.oracle.com/java/javase/terms/license/java25speclicense.html">license terms</a> and the <a href="https://www.oracle.com/technetwork/java/redist-137594.html">documentation redistribution policy</a>. <br><strong>DRAFT 25-internal-adhoc.runner.jdk</strong> <!-- Version 25-internal-adhoc.runner.jdk --></footer></body>
 </html>

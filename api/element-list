@@ -67,6 +67,7 @@ javax.tools
 module:java.datatransfer
 java.awt.datatransfer
 module:java.desktop
+java.applet
 java.awt
 java.awt.color
 java.awt.desktop
@@ -252,6 +253,8 @@ jdk.jshell
 jdk.jshell.execution
 jdk.jshell.spi
 jdk.jshell.tool
+module:jdk.jsobject
+netscape.javascript
 module:jdk.jstatd
 module:jdk.localedata
 module:jdk.management
