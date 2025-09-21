@@ -1,5 +1,7 @@
 name: "Build Javadocs"
 'on':
+  schedule:
+    - cron: "0 0 24 */6 *"
   workflow_dispatch:
 jobs:
   build_docs:
@@ -11,7 +13,7 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: '25'
+          java-version: 'latest'
           distribution: 'corretto'
       - uses: extractions/setup-just@v2
       - run: sudo apt-get update && sudo apt-get install libasound2-dev libcups2-dev libfontconfig1-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
