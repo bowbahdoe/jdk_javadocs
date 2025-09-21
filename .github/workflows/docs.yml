@@ -14,6 +14,6 @@ jobs:
           java-version: '25'
           distribution: 'corretto'
       - uses: extractions/setup-just@v2
-      - run: sudo apt-get install libasound2-dev libcups2-dev
+      - run: sudo apt-get update && sudo apt-get install libasound2-dev libcups2-dev
       - name: Clone JDK and Make Docs
         run: just docs
